@@ -1,24 +1,25 @@
 import cv2
-import numpy as np
 from matplotlib import pyplot as plt
 import os
 
 TRESHOLD = 15
 
 '''Taking all images that we want to classify for them'''
-path= "\\FeatureBasedTemplateMatching\\Class\\"
+path= "C:\\Users\\faruk\Documents\\git_ws\\FeatureBasedTemplateMatching\\Class\\"
 images = []
 classname = []
 image_list = os.listdir(path)
 
-'''Creating ORB object'''#Fast and Free to use
-orb = cv2.ORB_create()
 
 '''Creating classes via image names'''
 for clss in image_list:
     imgCurrent = cv2.imread(f'{path}{clss}',0)
     images.append(imgCurrent)
     classname.append(os.path.splitext(clss)[0])
+
+'''Creating ORB object'''#Fast and Free to use
+orb = cv2.ORB_create()
+
 
 '''Finding All Descriptors'''
 def findDesc(images):
@@ -51,7 +52,7 @@ def findID(img, descList):
 
 
 '''Image that we want to detect'''
-detection_image = cv2.imread("\\FeatureBasedTemplateMatching\\10kmmatch.jpg")
+detection_image = cv2.imread("C:\\Users\\faruk\Documents\\git_ws\\FeatureBasedTemplateMatching\\10kmmatch.jpg")
 img_gray = cv2.cvtColor(detection_image,cv2.COLOR_BGR2GRAY)
 
 
@@ -65,3 +66,4 @@ if id != -1:
 
 plt.imshow(detection_image)
 plt.show()
+cv2.imwrite("output.jpg",detection_image)
